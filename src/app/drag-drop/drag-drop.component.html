@@ -1,0 +1,10 @@
+<article>
+    <div id="dropedArea" class="area">
+        <div class="word drop" draggable="true" *ngFor="let word of choices">{{word}}</div>
+    </div>
+    <hr>
+    <div id="dragArea" class="area">
+        <div class="word drag" draggable="true" *ngFor="let word of options">{{word}}</div>
+    </div>
+    <button class="button-send" (click)="checkChoice()">Enviar</button>
+</article>

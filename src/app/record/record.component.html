@@ -1,0 +1,11 @@
+<article>
+    <h1>Grabación</h1>
+    <hr>
+    <div>
+        <button (mousedown)="startRecording()"
+                (mouseup)="stopRecording()">Comenzar</button>
+        <hr>
+        <button *ngIf="audio != null" 
+                (click)="audio.play()">Reproducir</button>
+    </div>
+</article>
