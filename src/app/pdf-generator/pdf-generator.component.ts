@@ -60,9 +60,9 @@ export class PdfGeneratorComponent implements OnInit {
 
   generatePDF() {  
     const fecha = new Date();
-    let counterA = 0;
-    let counterB = 0;
+    let counter = 0;
     let docDefinition: any = {
+      info: { title: 'Documento' },
       pageSize: 'A4',
       pageOrientation: 'portrait',
       header: {
@@ -95,9 +95,12 @@ export class PdfGeneratorComponent implements OnInit {
           layout: {
             hLineColor: (i: any, node: any) => {
               const campos = [1, 3, 5, 7, 9, 12, 14, 16, 18, 21, 23, 26, 29, 31, 34, 36];
-              counterA++;
-              if (campos.includes(counterA)) return 'white';
-                else return '#BDBDBD';
+              counter++;
+              if (campos.includes(counter)) return 'white';
+                else {
+                  if(counter == 38) counter = 0; 
+                  return '#BDBDBD'
+                };
             },
             vLineColor: 'white' ,
             paddingLeft   : () => { return 11; },
@@ -154,9 +157,12 @@ export class PdfGeneratorComponent implements OnInit {
           layout: {
             hLineColor: () => {
               const campos = [1, 3, 5, 7, 9, 12, 14, 16, 19, 21, 24, 26, 29, 31, 36, 38, 40, 43, 44, 47, 48];
-              counterB++;
-              if (campos.includes(counterB)) return 'white';
-                else return '#BDBDBD'
+              counter++;
+              if (campos.includes(counter)) return 'white';
+                else {
+                  if(counter == 49) counter = 0; 
+                  return '#BDBDBD'
+                };
             },
             vLineColor: 'white' ,
             paddingLeft   : () => { return 11; },
@@ -246,10 +252,40 @@ export class PdfGeneratorComponent implements OnInit {
           fontSize   : 6.5,
           alignment  : 'right',
         },
-        { alignment  : 'center',
-          columns: [
-          {text: 'FIRMA', bold: true, fontSize: 11},
-          {text: 'Huella digital', fontSize: 6.5}
+        { columns: [ 
+          { columns: [ {width: 120, text: ' '} ,{
+              margin: [0, 60, 0, 0],
+              fontSize: 11,
+              layout: {
+                hLineColor: () => {
+                  const campos = [3];
+                  counter++;
+                  if (campos.includes(counter)) return 'white';
+                    else {
+                      if(counter == 4) counter = 0; 
+                      return 'black'
+                    };
+                },
+                vLineColor: 'white' ,
+                paddingLeft   : () => { return 65; },
+                paddingRight  : () => { return 65; },
+                paddingTop    : () => { return 5; },
+                paddingBottom : () => { return 5; }
+              },
+              table: { body: [[ 'FIRMA' ]]}
+            }]
+          },
+          { fontSize: 6.5,
+            width: 200,
+            layout: {
+              hLineColor: '#BDBDBD' ,
+              vLineColor: '#BDBDBD' ,
+              paddingLeft   : () => { return 15; },
+              paddingRight  : () => { return 15; },
+              paddingTop    : () => { return 5; },
+              paddingBottom : () => { return 80; }
+            },
+            table: { body: [[ 'Huella digital' ]]}}
         ]}
       ]
     };  
