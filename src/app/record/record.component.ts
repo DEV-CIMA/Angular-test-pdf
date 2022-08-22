@@ -52,7 +52,10 @@ export class RecordComponent implements OnInit {
           });
         }
       )
-      .catch(error => { console.log(error) });
+      .catch(error => { 
+        console.log(error);
+        return alert('No se ha encontrado ningun dispositivo')
+      });
   };
 
   stopRecording() {

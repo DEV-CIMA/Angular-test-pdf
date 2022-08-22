@@ -3,15 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { DragDropComponent } from './drag-drop/drag-drop.component';
-import { StarsComponent } from './stars/stars.component';
+import { PdfGeneratorComponent } from './pdf-generator/pdf-generator.component';
 import { RecordComponent } from './record/record.component';
+import { PdfFormComponent } from './pdf-generator/pdf-form/pdf-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DragDropComponent,
-    StarsComponent,
-    RecordComponent
+    RecordComponent,
+    PdfGeneratorComponent,
+    PdfFormComponent,
   ],
   imports: [
     BrowserModule
