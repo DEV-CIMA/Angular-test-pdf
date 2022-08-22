@@ -11,45 +11,50 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class PdfGeneratorComponent implements OnInit {
   
-  public anno   = 2022;
-  public grado  = '2NDGRADO';
-  public nivel  = 'SECUNDARIA';
-  public sede   = 'JLO';
-  public monto   = '200.00 (doscientos soles) ';
+  public anno      =  2022;
   public localidad = 'Chiclayo';
+  public monto     = '200.00 (doscientos soles) ';
 
-  public dni    = 72999795;
-  public postulante = 'DIAZ VASQUEZ , YEILY YARELY';
-  public fNac   = '02/02/2009';
-  public edad   = 13;
-  public sexo   = 'FEMENINO';
-  public tfnSMS = 950413526;
-  public otrosTfn  = '950413526,\t988476654';
-  public direccion = 'INDOAMERICA 332 PJ. SAN LORENZO';
-  public distrito  = 'JOSE LEONARDO ORTIZ > CHICLAYO > JOSE LEONARDO ORTIZ';
-  public observaciones = '';
-  public religion  = 1;
-  public vive   = 'Madre, Padre';
-  public procedencia   = 'JORGE BASADRE > Chiclayo | Chiclayo | Lambayeque';
-
-  public relacion     = 'MADRE';
-  public parentNombre = 'VASQUEZ FERNANDEZ,LUCILA';
-  public parentDni    = 27427628;
-  public parentFNac   = '30/01/1975';
-  public parentDireccion   = 'INDOAMERICA 332 PJ. SAN LORENZO';
-  public parentSms   = 988476654;
-  public parentTfn   = '';
-  public parentEmail   = '';
-  public parentProf   = 'INDEPENDIENTE';
-  public parentCentLaboral   = 'COMERCIO DE MAIZ';
-  public parentCargo   = '';
-  public parentTfnTrabajo  = '';
-  public parentIngresoM   = '3000.00';
+  public postulante = {
+    direccion    : 'INDOAMERICA 332 PJ. SAN LORENZO',
+    distrito     : 'JOSE LEONARDO ORTIZ > CHICLAYO > JOSE LEONARDO ORTIZ',
+    dni          :  72999795,
+    edad         :  13,
+    fNac         : '02/02/2009',
+    grado        : '2NDGRADO',
+    nivel        : 'SECUNDARIA',
+    nombre       : 'DIAZ VASQUEZ , YEILY YARELY',
+    observaciones: '',
+    otrosTfn     : '950413526,\t988476654',
+    procedencia  : 'JORGE BASADRE > Chiclayo | Chiclayo | Lambayeque',
+    religion     :  1,
+    sede         : 'JLO',
+    sexo         : 'FEMENINO',
+    tfnSMS       : 950413526,
+    viveCon      : 'Madre, Padre'
+  }; 
+  public pariente = {
+    relacion   : 'MADRE',
+    nombre     : 'VASQUEZ FERNANDEZ,LUCILA',
+    dni        : 27427628,
+    fNac       : '30/01/1975',
+    direccion  : 'INDOAMERICA 332 PJ. SAN LORENZO',
+    sms        : 988476654,
+    tfn        : '',
+    email      : '',
+    prof       : 'INDEPENDIENTE',
+    centLaboral: 'COMERCIO DE MAIZ',
+    cargo      : '',
+    tfnTrabajo : '',
+    ingresoM   : '3000.00',
+  };
   
-  public resp     = 'VASQUEZ FERNANDEZ, LUCILA';
-  public respDni  = 27427628;
-  public respTlfn = 988476654;
-  public parentIngresoT = '6000.00';
+  public responsable = {
+    nombre  : 'VASQUEZ FERNANDEZ, LUCILA',
+    dni     : 27427628,
+    tfn     : 988476654,
+    ingresoT: '6000.00',
+  }
 
   constructor() {
   }
@@ -86,7 +91,7 @@ export class PdfGeneratorComponent implements OnInit {
         { text     : ' ',
           fontSize : 8,
         },
-        { text     : 'POSTULANTE ' + '\t\t' + this.grado + '\t\t' + this.nivel + '\t\t' + this.sede,
+        { text     : 'POSTULANTE ' + '\t\t' + this.postulante.grado + '\t\t' + this.postulante.nivel + '\t\t' + this.postulante.sede,
           fontSize : 15.5,
         },
         {canvas: [ { type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1 } ]},
@@ -112,38 +117,39 @@ export class PdfGeneratorComponent implements OnInit {
             body: [
               [ {text: 'DATOS:', colSpan: 9, fontSize: 10,}, '', '', '', '', '', '', '', ''],
               [ {text: 'DNI:', bold: true},
-                {text: this.dni + '\n'},
+                {text: this.postulante.dni + '\n'},
                 {text: 'POSTULANTE:', bold: true, colSpan: 2}, '',
-                {text: this.postulante, colSpan: 3}, '', '',
+                {text: this.postulante.nombre, colSpan: 3}, '', '',
                 {text: 'F.NAC:', bold: true}, 
-                {text: this.fNac}
+                {text: this.postulante.fNac}
               ],
               [ {text: 'EDAD:', bold: true, colSpan: 1},
-                {text: this.edad + ' AÑOS'},
+                {text: this.postulante.edad + ' AÑOS'},
                 {text: 'SEXO:', bold: true, colSpan: 1},
-                {text: this.sexo,},
+                {text: this.postulante.sexo,},
                 {text: 'TELÉF SMS:', bold: true,},
-                {text: this.tfnSMS, colSpan: 2}, '',
+                {text: this.postulante.tfnSMS, colSpan: 2}, '',
                 {text: 'OTROS TELÉF:', bold: true},
-                {text: this.otrosTfn}
+                {text: this.postulante.otrosTfn}
               ],
               [ {text: 'DIRECCIÓN:', bold: true, colSpan: 2}, '',
-                {text: this.direccion, colSpan: 3}, '', '',
+                {text: this.postulante.direccion, colSpan: 3}, '', '',
                 {text: 'DISTRITO:', bold: true},
-                {text: this.distrito, colSpan: 3}, '', ''
+                {text: this.postulante.distrito, colSpan: 3}, '', ''
               ],
               [ {text: 'OBSERVACIONES:', bold: true, colSpan: 2}, '',
-                {text: this.observaciones, colSpan: 7}, '', '', '', '', '', ''
+                {text: this.postulante.observaciones, colSpan: 7}, '', '', '', '', '', ''
               ],
               [ {text: 'ALUMNO(A) VIVE CON:', bold: true, colSpan: 2}, '',
-                {text: this.vive, alignment : 'center', colSpan: 3}, '', '',
+                {text: this.postulante.viveCon, alignment : 'center', colSpan: 3}, '', '',
                 {text: 'RELIGIÓN:', bold: true,},
-                {text: this.religion, alignment : 'center', colSpan: 3}, '', ''
+                {text: this.postulante.religion, alignment : 'center', colSpan: 3}, '', ''
               ],
               [ {text: 'COLEGIO:', colSpan: 9, fontSize: 10}, '', '', '', '', '', '', '', ''],
               [ {text: 'PROCEDENCIA:', bold: true, colSpan: 2}, '',
-                {text: [{text:this.procedencia}, {canvas: [ { type: 'line', x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1 }], color: 'black'}], colSpan: 7}, '', '', '', '', '', ''
+                {text: this.postulante.procedencia, colSpan: 7}, '', '', '', '', '', ''
               ],
+
             ]
           }
         },
@@ -172,47 +178,47 @@ export class PdfGeneratorComponent implements OnInit {
           },
           table: {
             body: [
-              [ {text: this.relacion + ':', colSpan: 9, fontSize: 8.5,}, '', '', '', '', '', '', '', ''],
+              [ {text: this.pariente.relacion + ':', colSpan: 9, fontSize: 8.5,}, '', '', '', '', '', '', '', ''],
               [ {text: 'DNI:', bold: true},
-                {text: this.parentDni, colSpan: 1},
+                {text: this.pariente.dni, colSpan: 1},
                 {text: 'NOMBRE:', bold: true}, 
-                {text: this.parentNombre, colSpan: 4}, '','', '',
+                {text: this.pariente.nombre, colSpan: 4}, '','', '',
                 {text: 'F.NAC:', bold: true}, 
-                {text: this.parentFNac}
+                {text: this.pariente.fNac}
               ],
               [ {text: 'DIRECCIÓN:', bold: true},
-                {text: this.parentDireccion, colSpan: 4}, '', '', '',
+                {text: this.pariente.direccion, colSpan: 4}, '', '', '',
                 {text: 'SMS:', bold: true,},
-                {text: this.parentSms, colSpan: 1},
+                {text: this.pariente.sms, colSpan: 1},
                 {text: 'TELÉF:', bold: true, colSpan: 1},
-                {text: this.parentTfn}
+                {text: this.pariente.tfn}
               ],
               [ {text: 'EMAIL:', bold: true,},
-                {text: this.parentEmail, colSpan: 4}, '', '', '',
+                {text: this.pariente.email, colSpan: 4}, '', '', '',
                 {text: 'PROF:', bold: true},
-                {text: this.parentProf, colSpan: 3}, '', ''
+                {text: this.pariente.prof, colSpan: 3}, '', ''
               ],
               [ {text: 'CENT. LABORAL:', bold: true},
-                {text: this.parentCentLaboral, colSpan: 4}, '', '', '',
+                {text: this.pariente.centLaboral, colSpan: 4}, '', '', '',
                 {text: 'CARGO:', bold: true, colSpan: 1},
-                {text: this.parentCargo, colSpan: 3}, '', ''
+                {text: this.pariente.cargo, colSpan: 3}, '', ''
               ],
               [ {text: 'TELF TRABAJO:', bold: true, colSpan: 1},
-                {text: this.parentTfnTrabajo, colSpan: 4}, '', '', '',
+                {text: this.pariente.tfnTrabajo, colSpan: 4}, '', '', '',
                 {text: 'INGRESO MENSUAL:', bold: true, colSpan: 2}, '',
-                {text: this.parentIngresoM, colSpan: 2}, ''
+                {text: this.pariente.ingresoM, colSpan: 2}, ''
               ],
               [ {text:' ', colSpan: 9, fontSize: 1}, '', '', '', '', '', '', '', ''],
               [ {text: 'RESP. DE PAGOS:', bold: true, colSpan: 1},
-                {text: this.resp, colSpan: 4}, '', '', '',
+                {text: this.responsable.nombre, colSpan: 4}, '', '', '',
                 {text: 'DNI:', bold: true, colSpan: 1},
-                {text: this.respDni,},
+                {text: this.responsable.dni,},
                 {text: 'TÉLEF:', bold: true, colSpan: 1},
-                {text: this.respTlfn}
+                {text: this.responsable.tfn}
               ],
               [ {text: '', colSpan: 5}, '', '', '', '',
                 {text: 'INGRESO TOTAL:', bold: true, colSpan: 2}, '',
-                {text: this.parentIngresoT, colSpan: 2}, ''
+                {text: this.responsable.ingresoT, colSpan: 2}, ''
               ],
               [ { text: '*\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t*' +
                   '*\t\t\t\t\t\t\t\t\t\t\t\t\t\t*',
@@ -232,7 +238,7 @@ export class PdfGeneratorComponent implements OnInit {
           fontSize  : 14,
         },
         { text       : [
-                        'YO, ' + this.parentNombre + ', DNI N°' + this.parentDni + 
+                        'YO, ' + this.pariente.nombre + ', DNI N°' + this.pariente.dni + 
                         ', por medio del presente documento declaro bajo juramento que lo datos suministrados en esta ficha son verdaderos. Igualmente declaro que he sido suficientemente informado(a) sobre los costos y características del servicio educativo brindado por la I.E. CIMA., con los cuales estoy conforme, también he leído el contrato de prestación de servicios educativos '
                         + this.anno +
                         ' y la declaración del padre o apoderado - año escolar ' + this.anno +
@@ -251,6 +257,7 @@ export class PdfGeneratorComponent implements OnInit {
                        ' del '+ fecha.toLocaleDateString('es-PE', { year: 'numeric' }),
           fontSize   : 6.5,
           alignment  : 'right',
+          margin     : [0, 0, 0, 20]
         },
         { columns: [ 
           { columns: [ {width: 120, text: ' '} ,{
@@ -258,9 +265,8 @@ export class PdfGeneratorComponent implements OnInit {
               fontSize: 11,
               layout: {
                 hLineColor: () => {
-                  const campos = [3];
                   counter++;
-                  if (campos.includes(counter)) return 'white';
+                  if (counter == 3) return 'white';
                     else {
                       if(counter == 4) counter = 0; 
                       return 'black'
