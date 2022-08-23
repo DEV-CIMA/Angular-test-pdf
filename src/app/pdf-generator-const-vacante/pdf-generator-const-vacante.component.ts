@@ -14,7 +14,7 @@ export class PdfGeneratorConstVacanteComponent implements OnInit {
   public vacante ={
     nombre: "MEDINA LEONARDO, RUBI ESMERALDA",
   }
-
+ public localidad = 'Chiclayo';
   public anioEscolar =2022;
   public fechaLimite ="23/02/2022";
   public nivel="NIVEL SENCODARY";
@@ -27,6 +27,14 @@ export class PdfGeneratorConstVacanteComponent implements OnInit {
   generatePDF() {
 
     const fecha = new Date();
+    pdfMake.fonts={
+      'Arial': {
+      normal: 'http://db.onlinewebfonts.com/t/8d223b3ad8d4819e9dcf22757e4cc2c4.woff',
+      bold: 'http://db.onlinewebfonts.com/t/c4b2bcd6a4c756d5d949e1d92deb838a.woff' ,
+      italics: 'http://db.onlinewebfonts.com/t/aff61981c45adf5bd823654376942e73.woff',
+      bolditalics: 'http://db.onlinewebfonts.com/t/9300626f67aca91609e5f8a8ed9928dc.woff',
+      }
+    }
     let docDefinition: any = {
       pageSize: 'A4',
       pageOrientation: 'portrait',
@@ -41,8 +49,9 @@ export class PdfGeneratorConstVacanteComponent implements OnInit {
         return {
           text: currentPage.toString() + '/' + pageCount,
           alignment : 'right',
-          fontSize : 15.5,
-          margin: [20, 0]
+          fontSize : 8,
+          margin: [20, 0],
+          italics: false
         }; 
       },
       content: [
@@ -130,6 +139,14 @@ export class PdfGeneratorConstVacanteComponent implements OnInit {
         { text : ['\nAtentamente.'],
         style: 'text',
         },
+        { text       : '\n\n'+this.localidad + ', ' + fecha.toLocaleDateString('es-PE', { day: '2-digit' }) +
+        ' de ' + fecha.toLocaleDateString('es-PE', { month: 'long' }) +
+        ' del '+ fecha.toLocaleDateString('es-PE', { year: 'numeric' }),
+        fontSize   : 10,
+        alignment  : 'right',
+        style:'text',
+        italics: false,
+        }
       ],
       styles:{
         text:{
@@ -139,13 +156,16 @@ export class PdfGeneratorConstVacanteComponent implements OnInit {
         lista:{
           alignment  : 'justify',
           margin: [ 85, 0, 74, 0 ],
-        }
+        },
+        
       },
       defaultStyle: {
         fontSize   : 10,
         lineHeight : 1.14,
         italics: true, 
+        font:'Arial'
       }
+
     };
     
     pdfMake.createPdf(docDefinition).open();  
