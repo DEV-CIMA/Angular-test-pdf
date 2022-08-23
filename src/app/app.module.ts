@@ -6,6 +6,7 @@ import { DragDropComponent } from './drag-drop/drag-drop.component';
 import { PdfGeneratorComponent } from './pdf-generator/pdf-generator.component';
 import { RecordComponent } from './record/record.component';
 import { PdfFormComponent } from './pdf-generator/pdf-form/pdf-form.component';
+import { PdfGeneratorConstVacanteComponent } from './pdf-generator-const-vacante/pdf-generator-const-vacante.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { PdfFormComponent } from './pdf-generator/pdf-form/pdf-form.component';
     RecordComponent,
     PdfGeneratorComponent,
     PdfFormComponent,
+    PdfGeneratorConstVacanteComponent,
   ],
   imports: [
     BrowserModule

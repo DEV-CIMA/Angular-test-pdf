@@ -17,7 +17,6 @@ export class PdfGeneratorComponent implements OnInit {
   public sede   = 'JLO';
   public monto   = '200.00 (doscientos soles) ';
   public localidad = 'Chiclayo';
-
   public dni    = 72999795;
   public postulante = 'DIAZ VASQUEZ , YEILY YARELY';
   public fNac   = '02/02/2009';
