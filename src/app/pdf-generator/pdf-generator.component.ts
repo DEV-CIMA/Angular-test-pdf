@@ -65,9 +65,9 @@ export class PdfGeneratorComponent implements OnInit {
 
   generatePDF() {  
     const fecha = new Date();
-    let counter = 0;
-    let docDefinition: any = {
-      info: { title: 'Documento' },
+    let   counter = 0;
+    const docDefinition: any = {
+      info: { title: 'Document' },
       pageSize: 'A4',
       pageOrientation: 'portrait',
       header: {

@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { DragDropComponent } from './drag-drop/drag-drop.component';
 import { PdfGeneratorComponent } from './pdf-generator/pdf-generator.component';
 import { RecordComponent } from './record/record.component';
-import { PdfFormComponent } from './pdf-generator/pdf-form/pdf-form.component';
+import { PdfGeneratorEconomicoComponent } from './pdf-generator-economico/pdf-generator-economico.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,7 @@ import { PdfFormComponent } from './pdf-generator/pdf-form/pdf-form.component';
     DragDropComponent,
     RecordComponent,
     PdfGeneratorComponent,
-    PdfFormComponent,
+    PdfGeneratorEconomicoComponent,
   ],
   imports: [
     BrowserModule
