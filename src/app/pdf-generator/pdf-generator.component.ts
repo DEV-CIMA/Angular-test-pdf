@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-pdfMake.vfs = pdfFonts.pdfMake.vfs; 
+import { vfs } from '../vfs_fonts';
 
 @Component({
   selector: 'app-pdf-generator',
@@ -13,6 +12,33 @@ export class PdfGeneratorComponent implements OnInit {
   
   public anno      =  2022;
   public localidad = 'Chiclayo';
+  public dni    = 72999795;
+  public fNac   = '02/02/2009';
+  public edad   = 13;
+  public sexo   = 'FEMENINO';
+  public tfnSMS = 950413526;
+  public otrosTfn  = '950413526,\t988476654';
+  public direccion = 'INDOAMERICA 332 PJ. SAN LORENZO';
+  public distrito  = 'JOSE LEONARDO ORTIZ > CHICLAYO > JOSE LEONARDO ORTIZ';
+  public observaciones = '';
+  public religion  = 1;
+  public vive   = 'Madre, Padre';
+  public procedencia   = 'JORGE BASADRE > Chiclayo | Chiclayo | Lambayeque';
+
+  public relacion     = 'MADRE';
+  public parentNombre = 'VASQUEZ FERNANDEZ,LUCILA';
+  public parentDni    = 27427628;
+  public parentFNac   = '30/01/1975';
+  public parentDireccion   = 'INDOAMERICA 332 PJ. SAN LORENZO';
+  public parentSms   = 988476654;
+  public parentTfn   = '';
+  public parentEmail   = '';
+  public parentProf   = 'INDEPENDIENTE';
+  public parentCentLaboral   = 'COMERCIO DE MAIZ';
+  public parentCargo   = '';
+  public parentTfnTrabajo  = '';
+  public parentIngresoM   = '3000.00';
+
   public monto     = '200.00 (doscientos soles) ';
 
   public postulante = {
@@ -31,7 +57,7 @@ export class PdfGeneratorComponent implements OnInit {
     sede         : 'JLO',
     sexo         : 'FEMENINO',
     tfnSMS       : 950413526,
-    viveCon      : 'Madre, Padre'
+    viveCon      : 'MADRE - PADRE'
   }; 
   public pariente = {
     relacion   : 'MADRE',
@@ -60,16 +86,40 @@ export class PdfGeneratorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    pdfMake.vfs = vfs; 
     this.generatePDF();
   }
 
   generatePDF() {  
+    pdfMake.fonts = {
+      Courier: {
+        normal: 'courier.woff',
+        bold: 'courierBold.woff',
+        italics: 'courierItalic.woff',
+        bolditalics: 'courierItalicBold.woff'
+      },
+      Arial: {
+        normal: 'arial.woff',
+        bold: 'arialBold.woff',
+        italics: 'arialItalic.woff',
+        bolditalics: 'arialItalicBold.woff'
+      },
+      ArialMT: {
+        normal: 'arialMT.woff',
+        bold: 'arialMTBold.woff',
+        italics: 'arialMTItalic.woff',
+        bolditalics: 'arialMTItalicBold.woff'
+      },
+    };
     const fecha = new Date();
     let   counter = 0;
     const docDefinition: any = {
       info: { title: 'Document' },
       pageSize: 'A4',
       pageOrientation: 'portrait',
+      defaultStyle: {
+        font: 'ArialMT'
+      },
       header: {
         margin: [21, 10],
         fontSize: 8,
@@ -89,7 +139,7 @@ export class PdfGeneratorComponent implements OnInit {
           alignment : 'center',
         },
         { text     : ' ',
-          fontSize : 8,
+          fontSize : 16,
         },
         { text     : 'POSTULANTE ' + '\t\t' + this.postulante.grado + '\t\t' + this.postulante.nivel + '\t\t' + this.postulante.sede,
           fontSize : 15.5,
@@ -99,7 +149,7 @@ export class PdfGeneratorComponent implements OnInit {
           fontSize: 6.5,
           layout: {
             hLineColor: (i: any, node: any) => {
-              const campos = [1, 3, 5, 7, 9, 12, 14, 16, 18, 21, 23, 26, 29, 31, 34, 36];
+              const campos = [1, 3, 5, 7, 9, 12, 14, 16, 18, 21, 23, 26, 29, 30, 31, 32, 34, 36];
               counter++;
               if (campos.includes(counter)) return 'white';
                 else {
@@ -108,45 +158,45 @@ export class PdfGeneratorComponent implements OnInit {
                 };
             },
             vLineColor: 'white' ,
-            paddingLeft   : () => { return 11; },
-            paddingRight  : () => { return 11; },
-            paddingTop    : () => { return 5; },
-            paddingBottom : () => { return 5; }
+            paddingLeft   : () => { return 8; },
+            paddingRight  : () => { return 8; },
+            paddingTop    : () => { return 8; },
+            paddingBottom : () => { return 0.5; }
           },
           table: {
             body: [
               [ {text: 'DATOS:', colSpan: 9, fontSize: 10,}, '', '', '', '', '', '', '', ''],
-              [ {text: 'DNI:', bold: true},
+              [ {text: 'DNI:', bold: true, font: 'Arial'},
                 {text: this.postulante.dni + '\n'},
-                {text: 'POSTULANTE:', bold: true, colSpan: 2}, '',
+                {text: 'POSTULANTE:', bold: true, colSpan: 2, font: 'Arial'}, '',
                 {text: this.postulante.nombre, colSpan: 3}, '', '',
-                {text: 'F.NAC:', bold: true}, 
+                {text: 'F.NAC:', bold: true, font: 'Arial'}, 
                 {text: this.postulante.fNac}
               ],
-              [ {text: 'EDAD:', bold: true, colSpan: 1},
+              [ {text: 'EDAD:', bold: true, colSpan: 1, font: 'Arial'},
                 {text: this.postulante.edad + ' AÑOS'},
-                {text: 'SEXO:', bold: true, colSpan: 1},
+                {text: 'SEXO:', bold: true, colSpan: 1, font: 'Arial'},
                 {text: this.postulante.sexo,},
-                {text: 'TELÉF SMS:', bold: true,},
+                {text: 'TELÉF SMS:', bold: true, font: 'Arial'},
                 {text: this.postulante.tfnSMS, colSpan: 2}, '',
-                {text: 'OTROS TELÉF:', bold: true},
+                {text: 'OTROS TELÉF:', bold: true, font: 'Arial'},
                 {text: this.postulante.otrosTfn}
               ],
-              [ {text: 'DIRECCIÓN:', bold: true, colSpan: 2}, '',
+              [ {text: 'DIRECCIÓN:', bold: true, colSpan: 2, font: 'Arial'}, '',
                 {text: this.postulante.direccion, colSpan: 3}, '', '',
-                {text: 'DISTRITO:', bold: true},
+                {text: 'DISTRITO:', bold: true, font: 'Arial'},
                 {text: this.postulante.distrito, colSpan: 3}, '', ''
               ],
-              [ {text: 'OBSERVACIONES:', bold: true, colSpan: 2}, '',
+              [ {text: 'OBSERVACIONES:', bold: true, colSpan: 2, font: 'Arial'}, '',
                 {text: this.postulante.observaciones, colSpan: 7}, '', '', '', '', '', ''
               ],
-              [ {text: 'ALUMNO(A) VIVE CON:', bold: true, colSpan: 2}, '',
+              [ {text: 'ALUMNO(A) VIVE CON:', bold: true, colSpan: 2, font: 'Arial'}, '',
                 {text: this.postulante.viveCon, alignment : 'center', colSpan: 3}, '', '',
-                {text: 'RELIGIÓN:', bold: true,},
+                {text: 'RELIGIÓN:', bold: true, font: 'Arial'},
                 {text: this.postulante.religion, alignment : 'center', colSpan: 3}, '', ''
               ],
               [ {text: 'COLEGIO:', colSpan: 9, fontSize: 10}, '', '', '', '', '', '', '', ''],
-              [ {text: 'PROCEDENCIA:', bold: true, colSpan: 2}, '',
+              [ {text: 'PROCEDENCIA:', bold: true, colSpan: 2, font: 'Arial'}, '',
                 {text: this.postulante.procedencia, colSpan: 7}, '', '', '', '', '', ''
               ],
 
@@ -171,53 +221,53 @@ export class PdfGeneratorComponent implements OnInit {
                 };
             },
             vLineColor: 'white' ,
-            paddingLeft   : () => { return 11; },
-            paddingRight  : () => { return 11; },
-            paddingTop    : () => { return 5; },
-            paddingBottom : () => { return 5; }
+            paddingLeft   : () => { return 8; },
+            paddingRight  : () => { return 8; },
+            paddingTop    : () => { return 8; },
+            paddingBottom : () => { return 0.5; }
           },
           table: {
             body: [
-              [ {text: this.pariente.relacion + ':', colSpan: 9, fontSize: 8.5,}, '', '', '', '', '', '', '', ''],
-              [ {text: 'DNI:', bold: true},
+              [ {text: this.pariente.relacion + ':', colSpan: 9, fontSize: 8.5, font: 'Arial'}, '', '', '', '', '', '', '', ''],
+              [ {text: 'DNI:', bold: true, font: 'Arial'},
                 {text: this.pariente.dni, colSpan: 1},
-                {text: 'NOMBRE:', bold: true}, 
+                {text: 'NOMBRE:', bold: true, font: 'Arial'}, 
                 {text: this.pariente.nombre, colSpan: 4}, '','', '',
-                {text: 'F.NAC:', bold: true}, 
+                {text: 'F.NAC:', bold: true, font: 'Arial'}, 
                 {text: this.pariente.fNac}
               ],
-              [ {text: 'DIRECCIÓN:', bold: true},
+              [ {text: 'DIRECCIÓN:', bold: true, font: 'Arial'},
                 {text: this.pariente.direccion, colSpan: 4}, '', '', '',
-                {text: 'SMS:', bold: true,},
+                {text: 'SMS:', bold: true, font: 'Arial'},
                 {text: this.pariente.sms, colSpan: 1},
-                {text: 'TELÉF:', bold: true, colSpan: 1},
+                {text: 'TELÉF:', bold: true, colSpan: 1, font: 'Arial'},
                 {text: this.pariente.tfn}
               ],
-              [ {text: 'EMAIL:', bold: true,},
+              [ {text: 'EMAIL:', bold: true, font: 'Arial'},
                 {text: this.pariente.email, colSpan: 4}, '', '', '',
-                {text: 'PROF:', bold: true},
+                {text: 'PROF:', bold: true, font: 'Arial'},
                 {text: this.pariente.prof, colSpan: 3}, '', ''
               ],
-              [ {text: 'CENT. LABORAL:', bold: true},
+              [ {text: 'CENT. LABORAL:', bold: true, font: 'Arial'},
                 {text: this.pariente.centLaboral, colSpan: 4}, '', '', '',
-                {text: 'CARGO:', bold: true, colSpan: 1},
+                {text: 'CARGO:', bold: true, colSpan: 1, font: 'Arial'},
                 {text: this.pariente.cargo, colSpan: 3}, '', ''
               ],
-              [ {text: 'TELF TRABAJO:', bold: true, colSpan: 1},
+              [ {text: 'TELF TRABAJO:', bold: true, colSpan: 1, font: 'Arial'},
                 {text: this.pariente.tfnTrabajo, colSpan: 4}, '', '', '',
-                {text: 'INGRESO MENSUAL:', bold: true, colSpan: 2}, '',
+                {text: 'INGRESO MENSUAL:', bold: true, colSpan: 2, font: 'Arial'}, '',
                 {text: this.pariente.ingresoM, colSpan: 2}, ''
               ],
               [ {text:' ', colSpan: 9, fontSize: 1}, '', '', '', '', '', '', '', ''],
-              [ {text: 'RESP. DE PAGOS:', bold: true, colSpan: 1},
+              [ {text: 'RESP. DE PAGOS:', bold: true, colSpan: 1, font: 'Arial'},
                 {text: this.responsable.nombre, colSpan: 4}, '', '', '',
-                {text: 'DNI:', bold: true, colSpan: 1},
+                {text: 'DNI:', bold: true, colSpan: 1, font: 'Arial'},
                 {text: this.responsable.dni,},
-                {text: 'TÉLEF:', bold: true, colSpan: 1},
+                {text: 'TÉLEF:', bold: true, colSpan: 1, font: 'Arial'},
                 {text: this.responsable.tfn}
               ],
               [ {text: '', colSpan: 5}, '', '', '', '',
-                {text: 'INGRESO TOTAL:', bold: true, colSpan: 2}, '',
+                {text: 'INGRESO TOTAL:', bold: true, colSpan: 2, font: 'Arial'}, '',
                 {text: this.responsable.ingresoT, colSpan: 2}, ''
               ],
               [ { text: '*\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t*' +
@@ -249,10 +299,12 @@ export class PdfGeneratorComponent implements OnInit {
                         'por concepto de gastos administrativos. En caso falte presentar alguno de los documentos antes mencionados, no podré matricular a mi menor; exonerando de toda responsabilidad a la I.E. CIMA. De comprobarse que he entregado documentos o información falsa, se dejará sin efecto todos los actos que se hayas generado, tomando en cuenta los documentos o información incorrecta.'
                        ],
           fontSize   : 8,
-          lineHeight : 1.25,
+          lineHeight : 1.5,
+          characterSpacing: 0.1,
           alignment  : 'justify',
         },
-        { text       : this.localidad + ', ' + fecha.toLocaleDateString('es-PE', { day: '2-digit' }) +
+        {text: '\n', fontSize: 14},
+        { text       : '' + this.localidad + ', ' + fecha.toLocaleDateString('es-PE', { day: '2-digit' }) +
                        ' de ' + fecha.toLocaleDateString('es-PE', { month: 'long' }) +
                        ' del '+ fecha.toLocaleDateString('es-PE', { year: 'numeric' }),
           fontSize   : 6.5,
@@ -284,8 +336,8 @@ export class PdfGeneratorComponent implements OnInit {
           { fontSize: 6.5,
             width: 200,
             layout: {
-              hLineColor: '#BDBDBD' ,
-              vLineColor: '#BDBDBD' ,
+              hLineColor: 'black' ,
+              vLineColor: 'black' ,
               paddingLeft   : () => { return 15; },
               paddingRight  : () => { return 15; },
               paddingTop    : () => { return 5; },

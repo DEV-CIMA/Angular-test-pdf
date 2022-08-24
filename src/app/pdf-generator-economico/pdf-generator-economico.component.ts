@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import pdfMake from 'pdfmake/build/pdfmake';
-// import pdfFonts from 'pdfmake/build/vfs_fonts';
-import { vfs } from './vfs_fonts';
+import { vfs } from '../vfs_fonts';
 
 @Component({
   selector: 'app-pdf-generator-economico',
@@ -43,6 +42,18 @@ export class PdfGeneratorEconomicoComponent implements OnInit {
         italics: 'courierItalic.woff',
         bolditalics: 'courierItalicBold.woff'
       },
+      Arial: {
+        normal: 'arial.woff',
+        bold: 'arialBold.woff',
+        italics: 'arialItalic.woff',
+        bolditalics: 'arialItalicBold.woff'
+      },
+      ArialMT: {
+        normal: 'arialMT.woff',
+        bold: 'arialMTBold.woff',
+        italics: 'arialMTItalic.woff',
+        bolditalics: 'arialMTItalicBold.woff'
+      },
     };
     const fecha  = new Date();
     let counter = 0;
@@ -50,7 +61,7 @@ export class PdfGeneratorEconomicoComponent implements OnInit {
       info: { title: 'Document' },
       pageSize: 'A4',
       defaultStyle: {
-        font: 'Courier'
+        font: 'ArialMT'
       },
       pageOrientation: 'portrait',
       header: {
@@ -69,6 +80,7 @@ export class PdfGeneratorEconomicoComponent implements OnInit {
       content: [{
         fontSize: 7.5,
         lineHeight : 1,
+        font: 'Courier',
         columns: [ 
           { 
             layout: {
