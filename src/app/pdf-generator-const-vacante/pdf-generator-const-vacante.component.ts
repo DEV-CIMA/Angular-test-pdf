@@ -27,12 +27,6 @@ export class PdfGeneratorConstVacanteComponent implements OnInit {
   generatePDF() {
     const fecha = new Date();
     pdfMake.fonts = {
-      Courier: {
-        normal: 'courier.woff',
-        bold: 'courierBold.woff',
-        italics: 'courierItalic.woff',
-        bolditalics: 'courierItalicBold.woff'
-      },
       Arial: {
         normal: 'arial.woff',
         bold: 'arialBold.woff',
