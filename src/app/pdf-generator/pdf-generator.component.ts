@@ -12,33 +12,6 @@ export class PdfGeneratorComponent implements OnInit {
   
   public anno      =  2022;
   public localidad = 'Chiclayo';
-  public dni    = 72999795;
-  public fNac   = '02/02/2009';
-  public edad   = 13;
-  public sexo   = 'FEMENINO';
-  public tfnSMS = 950413526;
-  public otrosTfn  = '950413526,\t988476654';
-  public direccion = 'INDOAMERICA 332 PJ. SAN LORENZO';
-  public distrito  = 'JOSE LEONARDO ORTIZ > CHICLAYO > JOSE LEONARDO ORTIZ';
-  public observaciones = '';
-  public religion  = 1;
-  public vive   = 'Madre, Padre';
-  public procedencia   = 'JORGE BASADRE > Chiclayo | Chiclayo | Lambayeque';
-
-  public relacion     = 'MADRE';
-  public parentNombre = 'VASQUEZ FERNANDEZ,LUCILA';
-  public parentDni    = 27427628;
-  public parentFNac   = '30/01/1975';
-  public parentDireccion   = 'INDOAMERICA 332 PJ. SAN LORENZO';
-  public parentSms   = 988476654;
-  public parentTfn   = '';
-  public parentEmail   = '';
-  public parentProf   = 'INDEPENDIENTE';
-  public parentCentLaboral   = 'COMERCIO DE MAIZ';
-  public parentCargo   = '';
-  public parentTfnTrabajo  = '';
-  public parentIngresoM   = '3000.00';
-
   public monto     = '200.00 (doscientos soles) ';
 
   public postulante = {
