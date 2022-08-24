@@ -44,6 +44,12 @@ export class PdfContanciaComponent implements OnInit {
         italics: 'arialMTItalic.woff',
         bolditalics: 'arialMTItalicBold.woff'
       },
+      TimesNewRoman:{
+        normal: 'times.ttf',
+        bold: 'timesBold.woff2',
+        italics: 'timesItalic.woff2',
+        bolditalics: 'timesItalicBold.woff2'
+      }
     };
     let docDefinition: any = {
       info: { title: 'Document' },
@@ -52,8 +58,7 @@ export class PdfContanciaComponent implements OnInit {
       defaultStyle: {
         fontSize   : 11,
         lineHeight : 1.14,
-        italics: true, 
-        font:'ArialMT'
+        font:'TimesNewRoman'
       },
       header: {
         margin: [21, 10],
@@ -75,7 +80,7 @@ export class PdfContanciaComponent implements OnInit {
         { text      :  {text: '\n\n\n\nCONSTANCIA PROVISIONAL DE VACANTE', bold: true},
         fontSize  : 15.5,
         alignment : 'center',
-        margin: [ 74, 35, 74, 0 ],
+        margin: [ 74,  70.8661417, 74, 0 ],
         italics: false, 
 
         },
@@ -83,14 +88,14 @@ export class PdfContanciaComponent implements OnInit {
         fontSize  : 15,
         },
         { text       : [
-          'El director de la Institución Educativa CIMA, con código modular ',{text:this.codigoModular, bold:true},
-          '(',{text:this.nivel, bold:true},').'
+          'El Director de la Institución Educativa CIMA, con código modular ',{text:this.codigoModular, bold:true},
+          ' (',{text:this.nivel, bold:true},').'
          ],
           style: 'text',
           italics: false, 
         },
         
-        { text: {text:'\nHacen constar que: \n', italics: true},
+        { text: {text:'\nHacen constar que: \n', bold: true},
          style: 'text',
         },
         { text       : {text: '\n'+this.vacante.nombre, italics: true, bold:true},
@@ -105,7 +110,7 @@ export class PdfContanciaComponent implements OnInit {
         },
         { text: [ '\nLa',{text:'Vacante definitiva', bold:true},'se asignará inmediatamente después que los padres o apoderados '+ 
                 'hayan cumplido con todos los requisitos indicados a continuación, necesarios para poder '+
-                'matricular correctamente en el año escolar 2022, tal como lo establece las disposiciones '+
+                'matricular correctamente en el año escolar ',{text: this.anioEscolar}, 'tal como lo establece las disposiciones '+
                 'legales del Ministerio de Educación - MINEDU , y el Sistema de Información de Apoyo a la'+
                 'Gestión de la Institución - SIAGIE.\n'],
           style: 'text',
@@ -131,12 +136,10 @@ export class PdfContanciaComponent implements OnInit {
             // widths: [ '*', 'auto', 100, '*' ],
       
             body: [
-              [ 'A.', 'Certificado de Estudios en original del año inmediatamente anterior que acredites haber culminado satisfactoriamente'],
-              [ 'B.', 'Ficha única de matrícula generada por el SIAGIE.'],
-              [ 'C.', 'Resolución de Traslado virtual.'],
-              [ 'D.', 'Copia de DNI del (la) postulante.'],
-              [ 'E.', 'Copia de la Partida de Nacimiento del (la) postulante.'],
-              [ 'F.', 'Suscribir el Contrato de Servicios Educativos del año escolar '+this.anioEscolar+' y la Declaración Jurada.'],
+              [ {text:'A.', bold:true },{text:'Certificado de Estudios en original del año inmediatamente anterior que acredites haber culminado satisfactoriamente', bold:true} ],
+              [ {text:'B.', bold:true }, {text:'Ficha única de matrícula generada por el SIAGIE.', bold:true}],
+              [ {text:'C.', bold:true }, {text:'Resolucion Traslado virtual', bold:true}],
+              [ {text:'D.', bold:true }, {text:'Suscribir el Contrato de Servicios Educativos del año escolar '+this.anioEscolar+' y la Declaración Jurada.', bold:true},],
             ]
           },
           style: 'text',
@@ -146,7 +149,7 @@ export class PdfContanciaComponent implements OnInit {
         { text       : ['\nEn caso no se cumpliera con algunos de los requisitos previstos en los literales A, B y C, antes mencionados, no procederá la asignación de vacante.'],
           style: 'text',
         },
-        { text : ['\nNo obstante lo contemplado anteriormente, esta constancia tendrá vigencia hasta el miércoles '+ 
+        { text : ['\nNo obstante, lo contemplado anteriormente, esta constancia tendrá vigencia hasta el'+ 
                 this.fechaLimite+'. En caso sea necesario renovar este plazo, deberán '+ 
                 'solicitarlo.'],
           style: "text",
@@ -164,16 +167,18 @@ export class PdfContanciaComponent implements OnInit {
         alignment  : 'right',
         style:'text',
         italics: false,
+        margin: [ 36,0, 70.8661417, 63.77953 ]
         }
+        
       ],
       styles:{
         text:{
           alignment  : 'justify',
-          margin: [ 74, 0, 74, 0 ],
+          margin: [ 36,0, 70.8661417, 0],
         },
         lista:{
           alignment  : 'justify',
-          margin: [ 85, 0, 74, 0 ],
+          margin: [ 36, 0, 70.8661417,  0],
         },
         
       },

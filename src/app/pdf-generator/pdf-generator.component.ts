@@ -60,28 +60,19 @@ export class PdfGeneratorComponent implements OnInit {
 
   ngOnInit(): void {
     pdfMake.vfs = vfs; 
+    console.log(pdfMake.vfs); 
     this.generatePDF();
   }
 
   generatePDF() {  
     pdfMake.fonts = {
-      Courier: {
-        normal: 'courier.woff',
-        bold: 'courierBold.woff',
-        italics: 'courierItalic.woff',
-        bolditalics: 'courierItalicBold.woff'
-      },
       Arial: {
         normal: 'arial.woff',
-        bold: 'arialBold.woff',
-        italics: 'arialItalic.woff',
-        bolditalics: 'arialItalicBold.woff'
+        bold: 'arialBold.woff'
       },
       ArialMT: {
         normal: 'arialMT.woff',
-        bold: 'arialMTBold.woff',
-        italics: 'arialMTItalic.woff',
-        bolditalics: 'arialMTItalicBold.woff'
+        bold: 'arialMTBold.woff'
       },
     };
     const fecha = new Date();
