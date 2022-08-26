@@ -44,34 +44,35 @@ export class PdfGeneratorEconomicoComponent implements OnInit {
       },
     };
     const fecha  = new Date();
-    let counter = 0;
+    var counter  = 0;
     const docDefinition: any = {
-      info: { title: 'Document' },
-      pageSize: 'A4',
-      defaultStyle: {
-        font: 'ArialMT'
+      defaultStyle : {
+        font       : 'ArialMT',
+        fontSize   : 7.5,
+        lineHeight : 1
       },
+      info: { title: 'Document' },
       pageOrientation: 'portrait',
+      pageSize: 'A4',
       header: {
-        margin: [21, 10],
         fontSize: 8,
-        text: fecha.toLocaleDateString() + ', ' + fecha.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        margin  : [ 21, 10 ],
+        text    : 
+          fecha.toLocaleDateString() + ', ' +
+          fecha.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       },
       footer: function(currentPage: any, pageCount:any) { 
         return {
           text: currentPage.toString() + '/' + pageCount,
           alignment : 'right',
-          fontSize : 8,
-          margin: [20, 0]
+          fontSize  : 8,
+          margin    : [ 20, 0 ]
         }; 
       },
       content: [{
-        fontSize: 7.5,
-        lineHeight : 1,
         font: 'Courier',
         columns: [ 
-          { 
-            layout: {
+          { layout: {
               hLineColor: (i: any, node: any) => {
                 counter++;
                 if ([17, 18, 19].includes(counter)) return 'black';
@@ -88,16 +89,16 @@ export class PdfGeneratorEconomicoComponent implements OnInit {
             },
             table: {
               body: [
-                [{text: 'IEP CIMA', colSpan: 6}, '', '', '', '', ''],
-                [{text:'RECIBO DE PAGO', colSpan: 4}, '', '', '', {text: 'N° ' + this.nrecibo, bold: true, colSpan: 2}, ''],
-                [{text:'FECHA DE EMISIÓN', colSpan: 4, margin: [0,5,0,21]}, '', '', '', {text: this.fechaEmision, bold: true, colSpan: 2, margin: [0,5,0,21]}, ''],
-                [{text:['ALUMNO:\t', {text: this.alumno, bold: true}], colSpan: 6}, '', '', '', '', ''],
-                [{text:['GRADO: \t', {text:this.grado + '- ?', bold: true}], colSpan: 6}, '', '', '', '', ''],
-                [{text:['NIVEL: \t', {text:this.nivel, bold: true}], colSpan: 6}, '', '', '', '', ''],
-                [{text:'Concepto', bold: true, alignment: 'center', colSpan: 2}, '', {text:'Fecha Venc.', bold: true, alignment: 'center', colSpan: 2}, '', {text:'Sub Total', bold: true, alignment: 'center', colSpan: 2}, ''],
-                [{text: this.concepto, alignment: 'center', colSpan: 2}, '', {text: this.fechaVencim, alignment: 'center', colSpan: 2}, '', {text: this.subTotal, alignment: 'center', colSpan: 2}, ''],
+                [{ text: 'IEP CIMA', colSpan: 6}, '', '', '', '', ''],
+                [{ text:'RECIBO DE PAGO', colSpan: 4}, '', '', '', {text: 'N° ' + this.nrecibo, bold: true, colSpan: 2}, ''],
+                [{ text:'FECHA DE EMISIÓN', colSpan: 4, margin: [0,5,0,21]}, '', '', '', {text: this.fechaEmision, bold: true, colSpan: 2, margin: [0,5,0,21]}, ''],
+                [{ text:['ALUMNO:\t', {text: this.alumno, bold: true}], colSpan: 6}, '', '', '', '', ''],
+                [{ text:['GRADO: \t', {text:this.grado + '- ?', bold: true}], colSpan: 6}, '', '', '', '', ''],
+                [{ text:['NIVEL: \t', {text:this.nivel, bold: true}], colSpan: 6}, '', '', '', '', ''],
+                [{ text:'Concepto', bold: true, alignment: 'center', colSpan: 2}, '', {text:'Fecha Venc.', bold: true, alignment: 'center', colSpan: 2}, '', {text:'Sub Total', bold: true, alignment: 'center', colSpan: 2}, ''],
+                [{ text: this.concepto, alignment: 'center', colSpan: 2}, '', {text: this.fechaVencim, alignment: 'center', colSpan: 2}, '', {text: this.subTotal, alignment: 'center', colSpan: 2}, ''],
                 ['', '', '', {text: 'S/.', bold: true, alignment: 'right', margin: [0,18,0,18]}, {text: this.total, colSpan: 2, bold: true, margin: [0,18,0,18], alignment: 'center'}, ''],
-                [{text: [
+                [{ text: [
                   'SON: ' + this.total + ' NUEVOS SOLES\n',
                   'Atendido por ' + this.entidad + ' el ' + this.fechaEmision,
                   '\n' + this.sede + '. Tlf. ' + this.tlf + '. ' + this.localidad,
@@ -110,8 +111,7 @@ export class PdfGeneratorEconomicoComponent implements OnInit {
               ]
             }
           },
-          { 
-            layout: {
+          { layout: {
               hLineColor: (i: any, node: any) => {
                 counter++;
                 if ([17, 18, 19].includes(counter)) return 'black';
@@ -128,16 +128,16 @@ export class PdfGeneratorEconomicoComponent implements OnInit {
             },
             table: {
               body: [
-                [{text: 'IEP CIMA', colSpan: 6}, '', '', '', '', ''],
-                [{text:'RECIBO DE PAGO', colSpan: 4}, '', '', '', {text: 'N° ' + this.nrecibo, bold: true, colSpan: 2}, ''],
-                [{text:'FECHA DE EMISIÓN', colSpan: 4, margin: [0,5,0,21]}, '', '', '', {text: this.fechaEmision, bold: true, colSpan: 2, margin: [0,5,0,21]}, ''],
-                [{text:['ALUMNO:\t\t', {text: this.alumno, bold: true}], colSpan: 6}, '', '', '', '', ''],
-                [{text:['GRADO: \t\t', {text:this.grado + '- ?', bold: true}], colSpan: 6}, '', '', '', '', ''],
-                [{text:['NIVEL: \t\t', {text:this.nivel, bold: true}], colSpan: 6}, '', '', '', '', ''],
-                [{text:'Concepto', bold: true, alignment: 'center', colSpan: 2}, '', {text:'Fecha Venc.', bold: true, alignment: 'center', colSpan: 2}, '', {text:'Sub Total', bold: true, alignment: 'center', colSpan: 2}, ''],
-                [{text: this.concepto, alignment: 'center', colSpan: 2}, '', {text: this.fechaVencim, alignment: 'center', colSpan: 2}, '', {text: this.subTotal, alignment: 'center', colSpan: 2}, ''],
+                [{ text: 'IEP CIMA', colSpan: 6}, '', '', '', '', ''],
+                [{ text:'RECIBO DE PAGO', colSpan: 4}, '', '', '', {text: 'N° ' + this.nrecibo, bold: true, colSpan: 2}, ''],
+                [{ text:'FECHA DE EMISIÓN', colSpan: 4, margin: [0,5,0,21]}, '', '', '', {text: this.fechaEmision, bold: true, colSpan: 2, margin: [0,5,0,21]}, ''],
+                [{ text:['ALUMNO:\t', {text: this.alumno, bold: true}], colSpan: 6}, '', '', '', '', ''],
+                [{ text:['GRADO: \t', {text:this.grado + '- ?', bold: true}], colSpan: 6}, '', '', '', '', ''],
+                [{ text:['NIVEL: \t', {text:this.nivel, bold: true}], colSpan: 6}, '', '', '', '', ''],
+                [{ text:'Concepto', bold: true, alignment: 'center', colSpan: 2}, '', {text:'Fecha Venc.', bold: true, alignment: 'center', colSpan: 2}, '', {text:'Sub Total', bold: true, alignment: 'center', colSpan: 2}, ''],
+                [{ text: this.concepto, alignment: 'center', colSpan: 2}, '', {text: this.fechaVencim, alignment: 'center', colSpan: 2}, '', {text: this.subTotal, alignment: 'center', colSpan: 2}, ''],
                 ['', '', '', {text: 'S/.', bold: true, alignment: 'right', margin: [0,18,0,18]}, {text: this.total, colSpan: 2, bold: true, margin: [0,18,0,18], alignment: 'center'}, ''],
-                [{text: [
+                [{ text: [
                   'SON: ' + this.total + ' NUEVOS SOLES\n',
                   'Atendido por ' + this.entidad + ' el ' + this.fechaEmision,
                   '\n' + this.sede + '. Tlf. ' + this.tlf + '. ' + this.localidad,
