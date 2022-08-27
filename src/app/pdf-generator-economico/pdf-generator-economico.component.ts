@@ -10,27 +10,32 @@ import { vfs } from '../vfs_fonts';
 })
 export class PdfGeneratorEconomicoComponent implements OnInit {
 
-  public nrecibo = 2821795;
-  public fechaEmision = '25/01/2022';
-  public fechaVencim = '25/01/2022';
-  public alumno = 'VALLEJOS HERRERA, JHINMER OCTAVIO';
-  public grado = '4TH';
-  public nivel = 'SECONDARY';
-  public web = 'https://colegiocima.edu.pe/';
-  public concepto = 'RESERVA DE VACANTE';
-  public subTotal = '310.00';
-  public entidad = 'BANCO CONTINENTAL, BBVA';
-  public total = 310;
-  public sede = 'Av. Alfonso Ugarte 640';
-  public tlf = '074 235050';
-  public localidad = 'Chiclayo';
-  public fechaimpreso = ' 2022-08-22 - 12:34:23 PM';
+  public recibo ={
+    nrecibo : 2821795,
+    fechaEmision : '25/01/2022',
+     fechaVencim : '25/01/2022',
+     concepto : 'RESERVA DE VACANTE',
+     alumno : 'VALLEJOS HERRERA, JHINMER OCTAVIO',
+     grado : '4TH',
+     nivel : 'SECONDARY',
+     web : 'https://colegiocima.edu.pe/',
+     subTotal : '310.00',
+     entidad : 'BANCO CONTINENTAL, BBVA',
+     total : 310,
+     sede : 'Av. Alfonso Ugarte 640',
+     tlf : '074 235050',
+     localidad : 'Chiclayo',
+     fechaimpreso : ' 2022-08-22 - 12:34:23 PM',
+  }
 
+  
+  public docDefinition: any;
   constructor() { }
 
   ngOnInit(): void {
     pdfMake.vfs = vfs; 
     this.generatePDF();
+    this.imprimirPDF();
   }
 
   generatePDF() {
@@ -45,7 +50,7 @@ export class PdfGeneratorEconomicoComponent implements OnInit {
     };
     const fecha  = new Date();
     var counter  = 0;
-    const docDefinition: any = {
+    this.docDefinition = {
       defaultStyle : {
         font       : 'ArialMT',
         fontSize   : 7.5,
@@ -90,19 +95,19 @@ export class PdfGeneratorEconomicoComponent implements OnInit {
             table: {
               body: [
                 [{ text: 'IEP CIMA', colSpan: 6}, '', '', '', '', ''],
-                [{ text:'RECIBO DE PAGO', colSpan: 4}, '', '', '', {text: 'N° ' + this.nrecibo, bold: true, colSpan: 2}, ''],
-                [{ text:'FECHA DE EMISIÓN', colSpan: 4, margin: [0,5,0,21]}, '', '', '', {text: this.fechaEmision, bold: true, colSpan: 2, margin: [0,5,0,21]}, ''],
-                [{ text:['ALUMNO:\t', {text: this.alumno, bold: true}], colSpan: 6}, '', '', '', '', ''],
-                [{ text:['GRADO: \t', {text:this.grado + '- ?', bold: true}], colSpan: 6}, '', '', '', '', ''],
-                [{ text:['NIVEL: \t', {text:this.nivel, bold: true}], colSpan: 6}, '', '', '', '', ''],
+                [{ text:'RECIBO DE PAGO', colSpan: 4}, '', '', '', {text: 'N° ' + this.recibo.nrecibo, bold: true, colSpan: 2}, ''],
+                [{ text:'FECHA DE EMISIÓN', colSpan: 4, margin: [0,5,0,21]}, '', '', '', {text: this.recibo.fechaEmision, bold: true, colSpan: 2, margin: [0,5,0,21]}, ''],
+                [{ text:['ALUMNO:\t', {text: this.recibo, bold: true}], colSpan: 6}, '', '', '', '', ''],
+                [{ text:['GRADO: \t', {text:this.recibo.grado + '- ?', bold: true}], colSpan: 6}, '', '', '', '', ''],
+                [{ text:['NIVEL: \t', {text:this.recibo.nivel, bold: true}], colSpan: 6}, '', '', '', '', ''],
                 [{ text:'Concepto', bold: true, alignment: 'center', colSpan: 2}, '', {text:'Fecha Venc.', bold: true, alignment: 'center', colSpan: 2}, '', {text:'Sub Total', bold: true, alignment: 'center', colSpan: 2}, ''],
-                [{ text: this.concepto, alignment: 'center', colSpan: 2}, '', {text: this.fechaVencim, alignment: 'center', colSpan: 2}, '', {text: this.subTotal, alignment: 'center', colSpan: 2}, ''],
-                ['', '', '', {text: 'S/.', bold: true, alignment: 'right', margin: [0,18,0,18]}, {text: this.total, colSpan: 2, bold: true, margin: [0,18,0,18], alignment: 'center'}, ''],
+                [{ text: this.recibo.concepto, alignment: 'center', colSpan: 2}, '', {text: this.recibo.fechaVencim, alignment: 'center', colSpan: 2}, '', {text: this.recibo.subTotal, alignment: 'center', colSpan: 2}, ''],
+                ['', '', '', {text: 'S/.', bold: true, alignment: 'right', margin: [0,18,0,18]}, {text: this.recibo.total, colSpan: 2, bold: true, margin: [0,18,0,18], alignment: 'center'}, ''],
                 [{ text: [
-                  'SON: ' + this.total + ' NUEVOS SOLES\n',
-                  'Atendido por ' + this.entidad + ' el ' + this.fechaEmision,
-                  '\n' + this.sede + '. Tlf. ' + this.tlf + '. ' + this.localidad,
-                  '\nWeb ' + this.web,
+                  'SON: ' + this.recibo.total + ' NUEVOS SOLES\n',
+                  'Atendido por ' + this.recibo.entidad + ' el ' + this.recibo.fechaEmision,
+                  '\n' + this.recibo.sede + '. Tlf. ' + this.recibo.tlf + '. ' + this.recibo.localidad,
+                  '\nWeb ' + this.recibo.web,
                   '\nImpreso el ' + fecha.toLocaleDateString('es-PE', { year: 'numeric' })
                   + '-' + fecha.toLocaleDateString('es-PE', { month: '2-digit' })
                   + '-' + fecha.toLocaleDateString('es-PE', { day: '2-digit' })
@@ -129,19 +134,19 @@ export class PdfGeneratorEconomicoComponent implements OnInit {
             table: {
               body: [
                 [{ text: 'IEP CIMA', colSpan: 6}, '', '', '', '', ''],
-                [{ text:'RECIBO DE PAGO', colSpan: 4}, '', '', '', {text: 'N° ' + this.nrecibo, bold: true, colSpan: 2}, ''],
-                [{ text:'FECHA DE EMISIÓN', colSpan: 4, margin: [0,5,0,21]}, '', '', '', {text: this.fechaEmision, bold: true, colSpan: 2, margin: [0,5,0,21]}, ''],
-                [{ text:['ALUMNO:\t', {text: this.alumno, bold: true}], colSpan: 6}, '', '', '', '', ''],
-                [{ text:['GRADO: \t', {text:this.grado + '- ?', bold: true}], colSpan: 6}, '', '', '', '', ''],
-                [{ text:['NIVEL: \t', {text:this.nivel, bold: true}], colSpan: 6}, '', '', '', '', ''],
+                [{ text:'RECIBO DE PAGO', colSpan: 4}, '', '', '', {text: 'N° ' + this.recibo.nrecibo, bold: true, colSpan: 2}, ''],
+                [{ text:'FECHA DE EMISIÓN', colSpan: 4, margin: [0,5,0,21]}, '', '', '', {text: this.recibo.fechaEmision, bold: true, colSpan: 2, margin: [0,5,0,21]}, ''],
+                [{ text:['ALUMNO:\t', {text: this.recibo.alumno, bold: true}], colSpan: 6}, '', '', '', '', ''],
+                [{ text:['GRADO: \t', {text:this.recibo.grado + '- ?', bold: true}], colSpan: 6}, '', '', '', '', ''],
+                [{ text:['NIVEL: \t', {text:this.recibo.nivel, bold: true}], colSpan: 6}, '', '', '', '', ''],
                 [{ text:'Concepto', bold: true, alignment: 'center', colSpan: 2}, '', {text:'Fecha Venc.', bold: true, alignment: 'center', colSpan: 2}, '', {text:'Sub Total', bold: true, alignment: 'center', colSpan: 2}, ''],
-                [{ text: this.concepto, alignment: 'center', colSpan: 2}, '', {text: this.fechaVencim, alignment: 'center', colSpan: 2}, '', {text: this.subTotal, alignment: 'center', colSpan: 2}, ''],
-                ['', '', '', {text: 'S/.', bold: true, alignment: 'right', margin: [0,18,0,18]}, {text: this.total, colSpan: 2, bold: true, margin: [0,18,0,18], alignment: 'center'}, ''],
+                [{ text: this.recibo.concepto, alignment: 'center', colSpan: 2}, '', {text: this.recibo.fechaVencim, alignment: 'center', colSpan: 2}, '', {text: this.recibo.subTotal, alignment: 'center', colSpan: 2}, ''],
+                ['', '', '', {text: 'S/.', bold: true, alignment: 'right', margin: [0,18,0,18]}, {text: this.recibo.total, colSpan: 2, bold: true, margin: [0,18,0,18], alignment: 'center'}, ''],
                 [{ text: [
-                  'SON: ' + this.total + ' NUEVOS SOLES\n',
-                  'Atendido por ' + this.entidad + ' el ' + this.fechaEmision,
-                  '\n' + this.sede + '. Tlf. ' + this.tlf + '. ' + this.localidad,
-                  '\nWeb ' + this.web,
+                  'SON: ' + this.recibo.total + ' NUEVOS SOLES\n',
+                  'Atendido por ' + this.recibo.entidad + ' el ' + this.recibo.fechaEmision,
+                  '\n' + this.recibo.sede + '. Tlf. ' + this.recibo.tlf + '. ' + this.recibo.localidad,
+                  '\nWeb ' + this.recibo.web,
                   '\nImpreso el ' + fecha.toLocaleDateString('es-PE', { year: 'numeric' })
                   + '-' + fecha.toLocaleDateString('es-PE', { month: '2-digit' })
                   + '-' + fecha.toLocaleDateString('es-PE', { day: '2-digit' })
@@ -153,6 +158,13 @@ export class PdfGeneratorEconomicoComponent implements OnInit {
         ]
       }]
     }
-    pdfMake.createPdf(docDefinition).open(); 
+
+  pdfMake.createPdf(this.docDefinition).open(); 
   };
+  
+  imprimirPDF(){
+    pdfMake.createPdf(this.docDefinition).print();
+  }
+  
+  ;
 }

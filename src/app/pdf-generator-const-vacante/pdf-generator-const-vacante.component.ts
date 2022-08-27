@@ -13,7 +13,7 @@ export class PdfGeneratorConstVacanteComponent implements OnInit {
   public vacante ={
     nombre: "MEDINA LEONARDO, RUBI ESMERALDA",
   }
- public localidad = 'Chiclayo';
+  public localidad = 'Chiclayo';
   public anioEscolar =2022;
   public fechaLimite ="23/02/2022";
   public nivel="NIVEL SENCODARY";
@@ -41,7 +41,7 @@ export class PdfGeneratorConstVacanteComponent implements OnInit {
       },
     };
     let docDefinition: any = {
-      info: { title: 'Document' },
+      info: { title: 'FormatoConstanciaVacante' },
       pageSize: 'A4',
       pageOrientation: 'portrait',
       defaultStyle: {
