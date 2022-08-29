@@ -9,7 +9,7 @@ import { vfs } from '../vfs_fonts';
   styleUrls: ['./pdf-generator.component.css']
 })
 export class PdfGeneratorComponent implements OnInit {
-  
+  public docDefinition: any;
   public anno      =  2022;
   public localidad = 'Chiclayo';
   public monto     = '200.00 (doscientos soles) ';
@@ -62,6 +62,7 @@ export class PdfGeneratorComponent implements OnInit {
     pdfMake.vfs = vfs; 
     console.log(pdfMake.vfs); 
     this.generatePDF();
+    this.printPDf();
   }
 
   generatePDF() {  
@@ -77,7 +78,7 @@ export class PdfGeneratorComponent implements OnInit {
     };
     const fecha = new Date();
     let   counter = 0;
-    const docDefinition: any = {
+    this.docDefinition = {
       info: { title: 'AdmisionFichaResumen' },
       pageSize: 'A4',
       pageOrientation: 'portrait',
@@ -319,9 +320,10 @@ export class PdfGeneratorComponent implements OnInit {
         ]}
       ]
     };  
-
-    pdfMake.createPdf(docDefinition).open();  
   }
   
+printPDf(){
+  pdfMake.createPdf(this.docDefinition).print();
 
+}
 }

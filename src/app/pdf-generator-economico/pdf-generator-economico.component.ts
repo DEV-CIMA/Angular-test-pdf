@@ -35,7 +35,7 @@ export class PdfGeneratorEconomicoComponent implements OnInit {
   ngOnInit(): void {
     pdfMake.vfs = vfs; 
     this.generatePDF();
-    this.imprimirPDF();
+    this.printPDF();
   }
 
   generatePDF() {
@@ -158,11 +158,8 @@ export class PdfGeneratorEconomicoComponent implements OnInit {
         ]
       }]
     }
-
-  pdfMake.createPdf(this.docDefinition).open(); 
   };
-  
-  imprimirPDF(){
+  printPDF(){
     pdfMake.createPdf(this.docDefinition).print();
   }
   

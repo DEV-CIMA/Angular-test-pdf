@@ -9,6 +9,7 @@ import { vfs } from '../vfs_fonts';
   styleUrls: ['./pdf-generator-const-vacante.component.css']
 })
 export class PdfGeneratorConstVacanteComponent implements OnInit {
+  public docDefinition: any;
 
   public vacante ={
     nombre: "MEDINA LEONARDO, RUBI ESMERALDA",
@@ -23,6 +24,7 @@ export class PdfGeneratorConstVacanteComponent implements OnInit {
   ngOnInit(): void {
     pdfMake.vfs = vfs; 
     this.generatePDF();
+    this.printPDF();
   }
   generatePDF() {
     const fecha = new Date();
@@ -40,7 +42,7 @@ export class PdfGeneratorConstVacanteComponent implements OnInit {
         bolditalics: 'arialMTItalicBold.woff'
       },
     };
-    let docDefinition: any = {
+    this.docDefinition = {
       info: { title: 'FormatoConstanciaVacante' },
       pageSize: 'A4',
       pageOrientation: 'portrait',
@@ -173,6 +175,8 @@ export class PdfGeneratorConstVacanteComponent implements OnInit {
       },
     };
     
-    pdfMake.createPdf(docDefinition).open();  
+  }
+  printPDF(){
+    pdfMake.createPdf(this.docDefinition).print();
   }
 }

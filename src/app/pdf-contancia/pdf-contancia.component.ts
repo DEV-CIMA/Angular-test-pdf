@@ -8,15 +8,19 @@ import { vfs } from '../vfs_fonts';
   styleUrls: ['./pdf-contancia.component.css']
 })
 export class PdfContanciaComponent implements OnInit {
-
+  public docDefinition: any;
   public vacante ={
     nombre: "MEDINA LEONARDO, RUBI ESMERALDA",
+    anioEscolar: 2022,
+    anioPosterior: 2023,
+    codigoModular: 1460740,
+    fechaLimite : new Date(2023,0,15),
+    localidad    : 'Chiclayo',
+    grado : "SEGUNDO GRADO",
+    años  : "3 AÑOS",
+    cargo         : "Director",
+    remitente     : "Luis Ríos Garabito",
   }
-  public anioEscolar   = 2022;
-  public anioPosterior = 2023;
-  public codigoModular = 1460740; 
-  public fechaLimite   = new Date(2023, 0, 15);
-  public localidad     = 'Chiclayo';
   public niveles       = [
       {
       id: 0,
@@ -33,12 +37,6 @@ export class PdfContanciaComponent implements OnInit {
     ]
     ;
 
-  public grado         = "SEGUNDO GRADO";
-  public años         = "3 AÑOS";
-
-  public cargo         = "Director";
-  public remitente     = "Luis Ríos Garabito";
-
   public inicial = true;
   public primaria = false;
   public secundaria = false;
@@ -47,6 +45,7 @@ export class PdfContanciaComponent implements OnInit {
   ngOnInit(): void {
     pdfMake.vfs = vfs; 
     this.generatePDF();
+    this.printPDF();
   }
   generatePDF() {
     pdfMake.fonts  = {
@@ -65,11 +64,11 @@ export class PdfContanciaComponent implements OnInit {
     if(this.inicial == true) {
       text1 = { text : [
               'El ',
-              { text: this.cargo },
+              { text: this.vacante.cargo },
               ' de la Institución Educativa ',
               { text: 'CIMA', bold: true },
               ', con código modular ',
-              { text: this.codigoModular, bold: true},
+              { text: this.vacante.codigoModular, bold: true},
               ' (', { text: this.niveles[0].descripcion, bold: true }, ').'
               ],
               style : 'text'
@@ -78,7 +77,7 @@ export class PdfContanciaComponent implements OnInit {
               '\nCuenta con una ',
               { text: 'vacante provisional', bold: true, italics: true },
               ' en nuestra institucion Educativa para  ',
-              { text: this.años, bold:true, italics: true }, ' del ',
+              { text: this.vacante.años, bold:true, italics: true }, ' del ',
               { text: this.niveles[0].descripcion.toUpperCase(), bold:true, italics: true }, '.'
               ],
               style: 'text',
@@ -109,12 +108,12 @@ export class PdfContanciaComponent implements OnInit {
                   ],
                   [ { text: '', border: noBorder },
                     { text: 'D.', border: noBorder },
-                    { text: 'Suscribir el Contrato de Servicios Educativos del año escolar ' + this.anioPosterior + '.', border: noBorder },
+                    { text: 'Suscribir el Contrato de Servicios Educativos del año escolar ' + this.vacante.anioPosterior + '.', border: noBorder },
                     { text: '', border: noBorder }
                   ],
                   [ { text: '', border: noBorder },
                     { text: 'E.', border: noBorder },
-                    { text: 'Declaración Jurada de los padres o apoderado año escolar ' + this.anioPosterior + '.', border: noBorder },
+                    { text: 'Declaración Jurada de los padres o apoderado año escolar ' + this.vacante.anioPosterior + '.', border: noBorder },
                     { text: '', border: noBorder }
                   ]
                 ]
@@ -128,11 +127,11 @@ export class PdfContanciaComponent implements OnInit {
     else if(this.primaria == true){
       text1 = { text : [
               'El ',
-              { text: this.cargo },
+              { text: this.vacante.cargo },
               ' de la Institución Educativa ',
               { text: 'CIMA', bold: true },
               ', con código modular ',
-              { text: this.codigoModular, bold: true},
+              { text: this.vacante.codigoModular, bold: true},
               ' (', { text: this.niveles[1].descripcion, bold: true }, ').'
               ],
               style : 'text'
@@ -141,7 +140,7 @@ export class PdfContanciaComponent implements OnInit {
               '\nCuenta con una ',
               { text: 'vacante provisional', bold: true, italics: true },
               ' en nuestra institucion Educativa para  ',
-              { text: this.grado, bold:true, italics: true }, ' del ',
+              { text: this.vacante.grado, bold:true, italics: true }, ' del ',
               { text: this.niveles[1].descripcion.toUpperCase(), bold:true, italics: true }, '.'
               ],
               style: 'text',
@@ -172,7 +171,7 @@ export class PdfContanciaComponent implements OnInit {
                   ],
                   [ { text: '', border: noBorder },
                     { text: 'D.', border: noBorder },
-                    { text: 'Suscribir el Contrato de Servicios Educativos del año escolar ' + this.anioPosterior + ' y la Declaración Jurada.', border: noBorder },
+                    { text: 'Suscribir el Contrato de Servicios Educativos del año escolar ' + this.vacante.anioPosterior + ' y la Declaración Jurada.', border: noBorder },
                     { text: '', border: noBorder }
                   ],
                 ]
@@ -185,11 +184,11 @@ export class PdfContanciaComponent implements OnInit {
     else if(this.secundaria==true){
       text1 = { text : [
               'El ',
-              { text: this.cargo },
+              { text: this.vacante.cargo },
               ' de la Institución Educativa ',
               { text: 'CIMA', bold: true },
               ', con código modular ',
-              { text: this.codigoModular, bold: true},
+              { text: this.vacante.codigoModular, bold: true},
               ' (', { text: this.niveles[2].descripcion, bold: true }, ').'
               ],
               style : 'text'
@@ -198,7 +197,7 @@ export class PdfContanciaComponent implements OnInit {
         '\nCuenta con una ',
         { text: 'vacante provisional', bold: true, italics: true },
         ' en nuestra institucion Educativa para  ',
-        { text: this.grado, bold:true, italics: true }, ' del ',
+        { text: this.vacante.grado, bold:true, italics: true }, ' del ',
         { text: this.niveles[2].descripcion.toUpperCase(), bold:true, italics: true }, '.'
         ],
         style: 'text',
@@ -229,7 +228,7 @@ export class PdfContanciaComponent implements OnInit {
                     ],
                     [ { text: '', border: noBorder },
                       { text: 'D.', border: noBorder },
-                      { text: 'Suscribir el Contrato de Servicios Educativos del año escolar ' + this.anioPosterior + ' y la Declaración Jurada.', border: noBorder },
+                      { text: 'Suscribir el Contrato de Servicios Educativos del año escolar ' + this.vacante.anioPosterior + ' y la Declaración Jurada.', border: noBorder },
                       { text: '', border: noBorder }
                     ],
                   ]
@@ -239,7 +238,7 @@ export class PdfContanciaComponent implements OnInit {
         };
         requisitos = 'En caso no se cumpliera con algunos de los requisitos previstos en los literales A, B y C, antes mencionados, no procederá la asignación de vacante.'
     }
-    let docDefinition: any = {
+    this.docDefinition = {
       defaultStyle : {
         alignment  : 'justify',
         font       : 'TimesNewRoman',
@@ -278,7 +277,7 @@ export class PdfContanciaComponent implements OnInit {
         { text: [ 
             '\nLa ', { text: 'Vacante definitiva', bold: true, italics: true },
             ' se asignará inmediatamente después que los padres o apoderados hayan cumplido con todos los requisitos indicados a continuación, necesarios para poder matricular correctamente en el año escolar ',
-            { text: this.anioPosterior },
+            { text: this.vacante.anioPosterior },
             ', tal como lo establece las disposiciones legales del Ministerio de Educación - MINEDU , y el Sistema de Información de Apoyo a la Gestión de la Institución - SIAGIE.\n\n'],
           style: 'text',
         }, tablePoints,
@@ -287,9 +286,9 @@ export class PdfContanciaComponent implements OnInit {
         },
         { text : [
             '\nNo obstante, lo contemplado anteriormente, esta constancia tendrá vigencia hasta el',
-            ' '    + this.fechaLimite.toLocaleDateString('es-PE', { day: '2-digit' })  ,
-            ' de ' + this.fechaLimite.toLocaleDateString('es-PE', { month: 'long' })   ,
-            ' del '+ this.fechaLimite.toLocaleDateString('es-PE', { year: 'numeric' }) ,
+            ' '    + this.vacante.fechaLimite.toLocaleDateString('es-PE', { day: '2-digit' })  ,
+            ' de ' + this.vacante.fechaLimite.toLocaleDateString('es-PE', { month: 'long' })   ,
+            ' del '+ this.vacante.fechaLimite.toLocaleDateString('es-PE', { year: 'numeric' }) ,
             '. En caso sea necesario renovar este plazo, deberán solicitarlo.'
           ],
           style: "text",
@@ -301,7 +300,7 @@ export class PdfContanciaComponent implements OnInit {
           style: 'text',
         },
         { text : [
-            this.localidad, 
+            this.vacante.localidad, 
             ', '   + fecha.toLocaleDateString('es-PE', { weekday: 'long' }) ,
             ' '    + fecha.toLocaleDateString('es-PE', { day: '2-digit' })  ,
             ' de ' + fecha.toLocaleDateString('es-PE', { month: 'long' })   ,
@@ -320,8 +319,8 @@ export class PdfContanciaComponent implements OnInit {
           },
           table: {
             body: [
-              [ { text: 'Prof. ' + this.remitente, bold: true, border: [false, true, false, false] } ],
-              [ { text: this.cargo, border: noBorder } ],
+              [ { text: 'Prof. ' + this.vacante.remitente, bold: true, border: [false, true, false, false] } ],
+              [ { text: this.vacante.cargo, border: noBorder } ],
             ]
           },
           alignment : 'center',
@@ -330,7 +329,8 @@ export class PdfContanciaComponent implements OnInit {
         },
       ],
     };
-    
-    pdfMake.createPdf(docDefinition).open();
+  }
+  printPDF(){
+    pdfMake.createPdf(this.docDefinition).print();
   }
 }

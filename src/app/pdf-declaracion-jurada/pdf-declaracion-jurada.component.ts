@@ -9,13 +9,15 @@ import { vfs } from '../vfs_fonts';
   styleUrls: ['./pdf-declaracion-jurada.component.css']
 })
 export class PdfDeclaracionJuradaComponent implements OnInit {
-
+  public docDefinition: any;
   constructor() { }
 
   ngOnInit(): void {
     pdfMake.vfs = vfs; 
     console.log(pdfMake.vfs); 
     this.generatePDF();
+    this.printPDF();
+
   }
 
   generatePDF() {
@@ -31,7 +33,7 @@ export class PdfDeclaracionJuradaComponent implements OnInit {
     };
     const fecha = new Date();
     let   counter = 0;
-    const docDefinition: any = {
+    this.docDefinition = {
 
         defaultStyle: {
           alignment : 'justify',
@@ -115,9 +117,8 @@ export class PdfDeclaracionJuradaComponent implements OnInit {
                 },
         ]
       }
-
-      pdfMake.createPdf(docDefinition).open();  
-    
-    
+    }
+    printPDF(){
+      pdfMake.createPdf(this.docDefinition).print();  
     }
 }
