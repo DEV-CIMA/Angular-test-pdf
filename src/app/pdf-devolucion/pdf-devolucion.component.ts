@@ -91,9 +91,9 @@ export class PdfDevolucionComponent implements OnInit {
               type: 'rect',
               x: 252,
               y: -8,
-              w: 80, //anchura
-              h: 25, //altura
-              r: 5, //border radius
+              w: 80,
+              h: 25,
+              r: 5,
               lineColor: '#C0C0C0',
               color: '#d9edf7',
             },
@@ -101,8 +101,6 @@ export class PdfDevolucionComponent implements OnInit {
         },
         {
           layout: {
-            // hLineColor: 'white',
-            // vLineColor: 'white',
             paddingLeft: () => {
               return 0;
             },
@@ -224,7 +222,6 @@ export class PdfDevolucionComponent implements OnInit {
                   alignment: 'center',
                   bold: true,
                   colSpan: 2,
-                  fontSize: 8,
                   lineHeight: 1.25,
                   margin: [1, 3],
                   border: [false, true, false, false],
