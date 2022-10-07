@@ -9,6 +9,8 @@ import { PdfGeneratorConstVacanteComponent } from './pdf-generator-const-vacante
 import { PdfContanciaComponent } from './pdf-contancia/pdf-contancia.component';
 import { RouterModule } from '@angular/router';
 import { PdfDeclaracionJuradaComponent } from './pdf-declaracion-jurada/pdf-declaracion-jurada.component';
+import { PdfIngresoComponent } from './pdf-ingreso/pdf-ingreso.component';
+import { PdfDevolucionComponent } from './pdf-devolucion/pdf-devolucion.component';
 
 @NgModule({
   declarations: [
@@ -20,25 +22,22 @@ import { PdfDeclaracionJuradaComponent } from './pdf-declaracion-jurada/pdf-decl
     PdfGeneratorConstVacanteComponent,
     PdfContanciaComponent,
     PdfDeclaracionJuradaComponent,
+    PdfIngresoComponent,
+    PdfDevolucionComponent,
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-        {path:'constanciaVacante', component: PdfContanciaComponent},
-        {path:'admisionFicha', component: PdfGeneratorComponent},
-        {path:'modeloVacante', component: PdfGeneratorConstVacanteComponent},
-        {path:'recibo', component: PdfGeneratorEconomicoComponent},
-        {path:'declaracionJurada', component: PdfDeclaracionJuradaComponent},
-
-    ])
+      { path: 'constanciaVacante', component: PdfContanciaComponent },
+      { path: 'admisionFicha', component: PdfGeneratorComponent },
+      { path: 'modeloVacante', component: PdfGeneratorConstVacanteComponent },
+      { path: 'recibo', component: PdfGeneratorEconomicoComponent },
+      { path: 'declaracionJurada', component: PdfDeclaracionJuradaComponent },
+      { path: 'devolucion', component: PdfDevolucionComponent },
+      { path: 'ingreso', component: PdfIngresoComponent },
+    ]),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
-
-
-
-
-
-
+export class AppModule {}
