@@ -94,8 +94,8 @@ export class PdfDevolucionComponent implements OnInit {
               w: 80, //anchura
               h: 25, //altura
               r: 5, //border radius
-              lineColor: '#BDBDBD',
-              color: '#00BFFF',
+              lineColor: '#C0C0C0',
+              color: '#d9edf7',
             },
           ],
         },
@@ -138,7 +138,7 @@ export class PdfDevolucionComponent implements OnInit {
                 '',
                 {
                   text: this.recibo.monto,
-                  color: '#060D50',
+                  color: '#337ab7',
                   fontSize: 10.5,
                   font: 'ArialMT',
                   alignment: 'center',
